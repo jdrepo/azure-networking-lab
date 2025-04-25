@@ -18,7 +18,8 @@ while true; do nc -lk -p 1139; done &
 # Install Apache and PHP
 sudo apt-get update
 sudo apt-get install apache2 -y
-sudo apt-get install php libapache2-mod-php php-mcrypt php-mysql -y
+#sudo apt-get install php libapache2-mod-php php-mcrypt php-mysql -y
+sudo apt-get install php libapache2-mod-php php-mysql -y
 sudo systemctl restart apache2
 
 # Delete default web site and download a new one
@@ -37,10 +38,11 @@ sudo ifmetric eth0 100
 # sudo ifmetric eth1 10  # This breaks the ILB!!!!
 sudo ifmetric eth1 200
 
+sudo apt install net-tools
 # configure static routes for the vnet space to eth0
 sudo route add -net 10.0.0.0/13 gw 10.4.2.1 dev eth0
 # and the Internet default to eth1 (just to be sure)
-sudo route add -net 0.0.0.0/0 gw 10.4.3.1 dev eth0
+sudo route add -net 0.0.0.0/0 gw 10.4.3.1 dev eth1
 # route for internal LB to work properly (will break ext LB unless PBR is configured, see next lines)
 # sudo route add -host 168.63.129.16 gw 10.4.2.1 dev eth0
 
