@@ -76,7 +76,8 @@ sudo iptables -A FORWARD -p icmp -j DROP
 # Allow SSH traffic on eth0
 sudo iptables -A FORWARD -i eth0 -p tcp --dport ssh -j ACCEPT 
 sudo iptables -A FORWARD -i eth0 -p tcp --dport 80 -j ACCEPT 
-sudo iptables -A FORWARD -i eth0 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT 
+sudo iptables -A FORWARD -i eth0 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+sudo iptables -A FORWARD -i eth1 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 
 # Allow forwarded traffic on eth1
 #sudo iptables -A FORWARD -i eth1 -j ACCEPT
